@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import Link from "next/link";
+import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
+
 export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -11,211 +12,162 @@ export default function Header() {
       {/* Header */}
       <header className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
         <nav className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          
+
           {/* Logo */}
-<Link href="/" className="font-bold text-3xl">     
-       <span>Deepak</span>
+          <Link href="/" className="font-bold text-3xl">
+            <span>Deepak</span>
             <span className="text-orange-500"> Kumar</span>
           </Link>
 
           {/* Desktop Menu */}
-          {/* Desktop Menu */}
-<ul className="hidden md:flex gap-8 text-[15px] font-medium text-gray-600">
-  <li>
-    <Link href="/#services" className="hover:text-orange-500 transition">
-      Services
-    </Link>
-  </li>
+          <ul className="hidden md:flex items-center gap-8 text-[15px] font-medium text-gray-600">
+            <li>
+              <a href="#services" className="hover:text-orange-500 transition">
+                Services
+              </a>
+            </li>
 
-  <li>
-    <Link href="/#work" className="hover:text-orange-500 transition">
-      Work
-    </Link>
-  </li>
+            <li>
+              <a href="#work" className="hover:text-orange-500 transition">
+                Work
+              </a>
+            </li>
 
-  <li>
-    <Link href="/#about" className="hover:text-orange-500 transition">
-      About
-    </Link>
-  </li>
+            <li>
+              <a href="#about" className="hover:text-orange-500 transition">
+                About
+              </a>
+            </li>
 
-  <li>
-    <Link href="/#journey" className="hover:text-orange-500 transition">
-      Journey
-    </Link>
-  </li>
+            <li>
+              <a href="#journey" className="hover:text-orange-500 transition">
+                Journey
+              </a>
+            </li>
 
-  <li>
-    <Link href="/#contact" className="hover:text-orange-500 transition">
-      Contact
-    </Link>
-  </li>
-</ul>
+            <li>
+              <a href="#contact" className="hover:text-orange-500 transition">
+                Contact
+              </a>
+            </li>
+          </ul>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
-  <Link
-    href="/#contact"
-    className="
-      bg-orange-500
-      hover:bg-orange-600
-      text-white
-      px-6
-      py-3
-      rounded-full
-      font-medium
-      transition-all
-      duration-300
-    "
-  >
-    Hire Me →
-  </Link>
-</div>
+          <div className="hidden md:flex items-center">
+            <a
+              href="#contact"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300"
+            >
+              Hire Me →
+            </a>
+          </div>
 
-        {/* Mobile Menu Button */}
-<button
-  className="md:hidden text-3xl"
-  onClick={() => setMobileMenu(true)}
->
-  <HiOutlineMenuAlt3 />
-</button>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-3xl"
+            onClick={() => setMobileMenu(true)}
+          >
+            <HiOutlineMenuAlt3 />
+          </button>
+        </nav>
+      </header>
 
-</nav>
-</header>
-
-{/* Mobile Menu */}
-
-{mobileMenu && (
-  <div
-    className="
-      fixed
-      inset-0
-      z-40
-      bg-black/40
-      backdrop-blur-sm
-      md:hidden
-    "
-    onClick={() => setMobileMenu(false)}
-  >
-    {/* Menu Panel */}
-
-    <div
-      className="
-        absolute
-        top-24
-        left-4
-        right-4
-        rounded-2xl
-        bg-slate-900/90
-        backdrop-blur-xl
-        border
-        border-white/10
-        shadow-2xl
-        overflow-hidden
-      "
-      onClick={(e) => e.stopPropagation()}
-    >
-      {/* Close Button */}
-
-      <div className="flex justify-end p-4">
-        <button
+      {/* Mobile Menu */}
+      {mobileMenu && (
+        <div
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
           onClick={() => setMobileMenu(false)}
-          className="text-white text-3xl"
         >
-          <HiX />
-        </button>
-      </div>
-
-      <ul className="flex flex-col px-6 pb-6 gap-5 text-lg">
-
-        <li>
-          <Link
-            href="/#services"
-            onClick={() => setMobileMenu(false)}
-            className="block text-white/90 hover:text-orange-500 transition"
+          <div
+            className="absolute top-24 left-4 right-4 rounded-2xl bg-slate-900/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
-            Services
-          </Link>
-        </li>
+            {/* Close */}
+            <div className="flex justify-end p-4">
+              <button
+                onClick={() => setMobileMenu(false)}
+                className="text-white text-3xl"
+              >
+                <HiX />
+              </button>
+            </div>
 
-        <li>
-          <Link
-            href="/#work"
-            onClick={() => setMobileMenu(false)}
-            className="block text-white/90 hover:text-orange-500 transition"
-          >
-            Work
-          </Link>
-        </li>
+            <ul className="flex flex-col px-6 pb-6 gap-5 text-lg">
 
-        <li>
-          <Link
-            href="/#about"
-            onClick={() => setMobileMenu(false)}
-            className="block text-white/90 hover:text-orange-500 transition"
-          >
-            About
-          </Link>
-        </li>
+              <li>
+                <a
+                  href="#services"
+                  onClick={() => setMobileMenu(false)}
+                  className="block text-white hover:text-orange-500 transition"
+                >
+                  Services
+                </a>
+              </li>
 
-        <li>
-          <Link
-            href="/#journey"
-            onClick={() => setMobileMenu(false)}
-            className="block text-white/90 hover:text-orange-500 transition"
-          >
-            Journey
-          </Link>
-        </li>
+              <li>
+                <a
+                  href="#work"
+                  onClick={() => setMobileMenu(false)}
+                  className="block text-white hover:text-orange-500 transition"
+                >
+                  Work
+                </a>
+              </li>
 
-        <li>
-          <Link
-            href="/#blog"
-            onClick={() => setMobileMenu(false)}
-            className="block text-white/90 hover:text-orange-500 transition"
-          >
-            Blog
-          </Link>
-        </li>
+              <li>
+                <a
+                  href="#about"
+                  onClick={() => setMobileMenu(false)}
+                  className="block text-white hover:text-orange-500 transition"
+                >
+                  About
+                </a>
+              </li>
 
-        <li>
-          <Link
-            href="/#contact"
-            onClick={() => setMobileMenu(false)}
-            className="block text-white/90 hover:text-orange-500 transition"
-          >
-            Contact
-          </Link>
-        </li>
+              <li>
+                <a
+                  href="#journey"
+                  onClick={() => setMobileMenu(false)}
+                  className="block text-white hover:text-orange-500 transition"
+                >
+                  Journey
+                </a>
+              </li>
 
-        <li className="pt-4 border-t border-white/10">
-          <Link
-            href="/#contact"
-            onClick={() => setMobileMenu(false)}
-            className="
-              inline-flex
-              items-center
-              justify-center
-              bg-orange-500
-              hover:bg-orange-600
-              text-white
-              px-6
-              py-3
-              rounded-full
-              font-medium
-              transition
-              w-full
-            "
-          >
-            Hire Me →
-          </Link>
-        </li>
+              <li>
+                <a
+                  href="#blog"
+                  onClick={() => setMobileMenu(false)}
+                  className="block text-white hover:text-orange-500 transition"
+                >
+                  Blog
+                </a>
+              </li>
 
-      </ul>
-    </div>
-  </div>
-)}
+              <li>
+                <a
+                  href="#contact"
+                  onClick={() => setMobileMenu(false)}
+                  className="block text-white hover:text-orange-500 transition"
+                >
+                  Contact
+                </a>
+              </li>
 
-</>
-);
+              <li className="pt-4 border-t border-white/10">
+                <a
+                  href="#contact"
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center justify-center w-full bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition"
+                >
+                  Hire Me →
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
