@@ -16,9 +16,11 @@ interface Service {
 }
 
 export default async function Services() {
-  const services: Service[] = await fetchAPI(
-    "/service?_embed&orderby=date&order=asc"
-  );
+const services: Service[] = await fetchAPI(
+  "/service?_embed&orderby=date&order=asc"
+);
+
+console.log(services);
 
   return (
     <section id="services" className="py-24 bg-gray-50">

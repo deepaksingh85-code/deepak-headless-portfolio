@@ -9,6 +9,8 @@ import Blog from "./components/Blog/Blog";
 import Footer from "./components/Footer/Footer";
 
 import { fetchAPI } from "@/lib/wordpress";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function Home() {
   const home = await fetchAPI("/pages?slug=home");
