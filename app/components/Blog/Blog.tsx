@@ -1,4 +1,3 @@
-
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 import Image from "next/image";
@@ -16,39 +15,17 @@ interface BlogPost {
   excerpt: {
     rendered: string;
   };
+  _embedded?: {
+    "wp:featuredmedia": {
+      source_url: string;
+    }[];
+  };
 }
-
 export default async function Blog() {
-  const blogs: BlogPost[] = await fetchAPI("/posts?per_page=3");
+const blogs: BlogPost[] = await fetchAPI(
+  "/posts?_embed&per_page=3"
+);
 
-  const blogsWithImage = await Promise.all(
-    blogs.map(async (blog) => {
-      let image = "/images/placeholder.webp";
-
-      if (blog.featured_media) {
-        try {
-          const media: any = await fetchAPI(
-            `/media/${blog.featured_media}`
-          );
-
-          console.log("MEDIA =>", media);
-
-          image =
-            media.source_url ||
-            media.guid?.rendered ||
-            media.media_details?.sizes?.full?.source_url ||
-            "/images/placeholder.webp";
-        } catch (e) {
-          console.log("MEDIA ERROR", e);
-        }
-      }
-
-      return {
-        ...blog,
-        image,
-      };
-    })
-  );
 
   return (
     <section id="blog" className="py-24 bg-white">
@@ -75,8 +52,7 @@ export default async function Blog() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          {blogsWithImage.map((blog) => (
-
+{blogs.map((blog) => (
             <article
               key={blog.id}
               className="group bg-white border rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300"
@@ -84,13 +60,16 @@ export default async function Blog() {
 
               <div className="relative h-60">
 
-                <Image
-                  src={blog.image}
-                  alt={blog.title.rendered}
-                  fill
-                  unoptimized
-                  className="object-cover group-hover:scale-105 transition duration-500"
-                />
+               <Image
+  src={
+    blog._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+    "/images/placeholder.webp"
+  }
+  alt={blog.title.rendered}
+  fill
+  unoptimized
+  className="object-cover group-hover:scale-105 transition duration-500"
+/>
 
               </div>
 

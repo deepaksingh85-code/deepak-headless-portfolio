@@ -14,27 +14,56 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function Home() {
-  const home = await fetchAPI("/pages?slug=home");
+  const [
+    home,
+    services,
+    portfolio,
+    timeline,
+    blogs,
+  ] = await Promise.all([
+    fetchAPI("/pages?slug=home"),
+    fetchAPI("/service?_embed&orderby=date&order=asc"),
+    fetchAPI("/portfolio?_embed"),
+    fetchAPI("/timeline"),
+    fetchAPI("/posts?_embed&per_page=3"),
+  ]);
 
-  const acf = home[0].acf;
+  const acf = home[0]?.acf;
 
-  const media = await fetchAPI(`/media/${acf.hero_image}`);
+  let heroImage = "";
+
+  if (acf?.hero_image) {
+    try {
+      const media = await fetchAPI(`/media/${acf.hero_image}`);
+      heroImage = media.source_url;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const heroData = {
     ...acf,
-    hero_image: media.source_url,
+    hero_image: heroImage,
   };
 
   return (
     <>
       <Header />
+
       <Hero data={heroData} />
-      <Services />
+
+      <Services data={services} />
+
       <About />
-      <Portfolio />
-      <Testimonials />
-      <Blog />
+
+      <Portfolio data={portfolio} />
+
+      <Testimonials data={timeline} />
+
+      <Blog data={blogs} />
+
       <Contact />
+
       <Footer />
     </>
   );

@@ -1,8 +1,3 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
-import { fetchAPI } from "@/lib/wordpress";
-
 interface Service {
   id: number;
   title: {
@@ -18,10 +13,12 @@ interface Service {
   };
 }
 
-export default async function Services() {
-  const services: Service[] = await fetchAPI(
-    "/service?_embed&orderby=date&order=asc"
-  );
+interface ServicesProps {
+  data: Service[];
+}
+
+export default function Services({ data }: ServicesProps) {
+  const services = data || [];
 
   return (
     <section id="services" className="py-24 bg-gray-50">
