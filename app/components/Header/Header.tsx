@@ -19,37 +19,38 @@ export default function Header() {
           </Link>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex gap-8 text-[15px] font-medium text-gray-600">
-            <li>
-              <Link href="/" className="hover:text-orange-500 transition">
-                Services
-              </Link>
-            </li>
+          {/* Desktop Menu */}
+<ul className="hidden md:flex gap-8 text-[15px] font-medium text-gray-600">
+  <li>
+    <Link href="/#services" className="hover:text-orange-500 transition">
+      Services
+    </Link>
+  </li>
 
-            <li>
-             <Link href="/" className="hover:text-orange-500 transition">
-                Work
-           </Link>
-            </li>
+  <li>
+    <Link href="/#work" className="hover:text-orange-500 transition">
+      Work
+    </Link>
+  </li>
 
-            <li>
-              <Link href="/" className="hover:text-orange-500 transition">
-                About
-              </Link>
-            </li>
+  <li>
+    <Link href="/#about" className="hover:text-orange-500 transition">
+      About
+    </Link>
+  </li>
 
-            <li>
-              <Link href="/"  className="hover:text-orange-500 transition">
-                Journey
-           </Link>
-            </li>
+  <li>
+    <Link href="/#journey" className="hover:text-orange-500 transition">
+      Journey
+    </Link>
+  </li>
 
-            <li>
-              <Link href="/"  className="hover:text-orange-500 transition">
-                Contact
-              </Link>
-            </li>
-          </ul>
+  <li>
+    <Link href="/#contact" className="hover:text-orange-500 transition">
+      Contact
+    </Link>
+  </li>
+</ul>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
