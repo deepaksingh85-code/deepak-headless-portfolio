@@ -83,7 +83,7 @@ export default async function Portfolio() {
                   {project.acf?.short_description}
                 </p>
 <a
-  href={project.acf.project_url}
+  href={project.acf.project_link}
   target="_blank"
   rel="noopener noreferrer"
   className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all duration-300"
