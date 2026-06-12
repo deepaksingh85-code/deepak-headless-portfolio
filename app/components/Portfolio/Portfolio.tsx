@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { fetchAPI } from "@/lib/wordpress";
 
 interface Portfolio {
   id: number;
@@ -17,8 +16,14 @@ interface Portfolio {
   };
 }
 
-export default async function Portfolio() {
-  const projects: Portfolio[] = await fetchAPI("/portfolio?_embed");
+interface PortfolioProps {
+  data: Portfolio[];
+}
+
+export default function Portfolio({
+  data,
+}: PortfolioProps) {
+  const projects = data || [];
 
   return (
     <section id="work" className="py-24 bg-white">
@@ -82,14 +87,16 @@ export default async function Portfolio() {
                 <p className="text-gray-600 leading-8 mb-6">
                   {project.acf?.short_description}
                 </p>
-<a
-  href={project.acf.project_link}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all duration-300"
->
-  View Project →
-</a>
+
+                <a
+                  href={project.acf?.project_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all duration-300"
+                >
+                  View Project →
+                </a>
+
               </div>
 
             </div>
@@ -102,3 +109,4 @@ export default async function Portfolio() {
     </section>
   );
 }
+
