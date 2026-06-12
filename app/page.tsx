@@ -1,6 +1,3 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services";
@@ -13,13 +10,14 @@ import Footer from "./components/Footer/Footer";
 
 import { fetchAPI } from "@/lib/wordpress";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function Home() {
   const home = await fetchAPI("/pages?slug=home");
 
   const acf = home[0].acf;
-const timeline = await fetchAPI("/timeline");
-  // Fetch Hero Image
+
   const media = await fetchAPI(`/media/${acf.hero_image}`);
 
   const heroData = {
@@ -34,14 +32,10 @@ const timeline = await fetchAPI("/timeline");
       <Services />
       <About />
       <Portfolio />
-      <Testimonials data={timeline}  />
+      <Testimonials />
       <Blog />
       <Contact />
       <Footer />
     </>
   );
 }
-
-
-
-

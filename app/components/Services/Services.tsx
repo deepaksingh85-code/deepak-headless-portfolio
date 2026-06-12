@@ -19,11 +19,9 @@ interface Service {
 }
 
 export default async function Services() {
-const services: Service[] = await fetchAPI(
-  "/service?_embed&orderby=date&order=asc"
-);
-
-console.log(services);
+  const services: Service[] = await fetchAPI(
+    "/service?_embed&orderby=date&order=asc"
+  );
 
   return (
     <section id="services" className="py-24 bg-gray-50">
@@ -40,9 +38,7 @@ console.log(services);
             Services
           </h2>
         </div>
-<p className="text-red-500 text-3xl font-bold">
-  {new Date().toISOString()}
-</p>
+
         {/* Service Cards */}
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -56,7 +52,7 @@ console.log(services);
 
               {/* Icon */}
 
-              <div className="w-16 h-16 rounded-2xl  flex items-center justify-center mb-8">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-8">
 
                 <img
                   src={
