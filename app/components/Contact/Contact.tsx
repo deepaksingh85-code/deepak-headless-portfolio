@@ -13,9 +13,11 @@ export default function Contact() {
     >
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
+
           {/* Left Side */}
+
           <div>
+
             <p className="text-orange-500 uppercase tracking-widest text-sm font-medium mb-3">
               Contact
             </p>
@@ -30,6 +32,7 @@ export default function Contact() {
             </p>
 
             <div className="space-y-5">
+
               <a
                 href="mailto:dddeepaksingh85@gmail.com"
                 className="flex items-center gap-4 hover:text-orange-500 transition"
@@ -49,6 +52,7 @@ export default function Contact() {
               <a
                 href="https://www.linkedin.com/in/deepak-kumar-singh085/"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 hover:text-orange-500 transition"
               >
                 <FaLinkedin size={22} />
@@ -58,57 +62,103 @@ export default function Contact() {
               <a
                 href="https://github.com/deepaksingh85-code/"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 hover:text-orange-500 transition"
               >
                 <FaGithub size={22} />
                 <span>GitHub Profile</span>
               </a>
+
             </div>
+
           </div>
 
           {/* Right Side */}
+
           <div>
-            <form className="space-y-5">
+
+            <form
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              className="space-y-5"
+            >
+
+              {/* Access Key */}
+
+              <input
+                type="hidden"
+                name="access_key"
+                value="1d29774c-7aa7-4f56-bb73-831216f56c7d"
+              />
+
+              {/* Subject */}
+
+              <input
+                type="hidden"
+                name="subject"
+                value="New Portfolio Contact Form Submission"
+              />
+
+              {/* Name */}
+
               <input
                 type="text"
+                name="name"
                 placeholder="Your Name"
+                required
                 className="w-full bg-slate-800 border border-slate-700 rounded-xl px-5 py-4 focus:border-orange-500 outline-none"
               />
+
+              {/* Email */}
 
               <input
                 type="email"
+                name="email"
                 placeholder="Your Email"
+                required
                 className="w-full bg-slate-800 border border-slate-700 rounded-xl px-5 py-4 focus:border-orange-500 outline-none"
               />
 
+              {/* Project */}
+
               <input
                 type="text"
+                name="project"
                 placeholder="Project Type"
                 className="w-full bg-slate-800 border border-slate-700 rounded-xl px-5 py-4 focus:border-orange-500 outline-none"
               />
 
+              {/* Message */}
+
               <textarea
+                name="message"
                 rows={5}
+                required
                 placeholder="Tell me about your project..."
                 className="w-full bg-slate-800 border border-slate-700 rounded-xl px-5 py-4 focus:border-orange-500 outline-none resize-none"
               />
 
+              {/* Button */}
+
               <button
                 type="submit"
                 className="
+                  w-full
                   bg-orange-500
                   hover:bg-orange-600
-                  px-8
                   py-4
                   rounded-xl
                   font-semibold
-                  transition
-                  w-full
+                  text-lg
+                  transition-all
+                  duration-300
                 "
               >
                 Send Message 🚀
               </button>
+
             </form>
+
           </div>
 
         </div>

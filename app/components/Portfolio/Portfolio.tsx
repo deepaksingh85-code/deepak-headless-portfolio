@@ -1,81 +1,101 @@
 import Image from "next/image";
+import { fetchAPI } from "@/lib/wordpress";
 
-const projects = [
-  {
-    title: "Headless WordPress Platform",
-    category: "Next.js + WordPress",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80",
-    description:
-      "Headless CMS using WordPress REST API and Next.js frontend.",
-  },
-  {
-    title: "Shopify Fashion Store",
-    category: "Shopify",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
-    description:
-      "Custom Shopify storefront with advanced filtering and metafields.",
-  },
-  {
-    title: "WooCommerce Integration",
-    category: "WordPress",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
-    description:
-      "WooCommerce store integrated with CRM and marketing automation.",
-  },
-];
+interface Portfolio {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  acf: {
+    short_description: string;
+    project_link: string;
+  };
+  _embedded?: {
+    "wp:featuredmedia": {
+      source_url: string;
+    }[];
+  };
+}
 
-export default function Portfolio() {
+export default async function Portfolio() {
+  const projects: Portfolio[] = await fetchAPI("/portfolio?_embed");
+
   return (
-    <section id="work" className="py-24 bg-gray-50">
+    <section id="work" className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6">
-        
+
+        {/* Heading */}
+
         <div className="mb-14">
-          <p className="text-sm font-medium text-orange-500 uppercase tracking-widest mb-3">
-            Portfolio
+          <p className="text-sm font-semibold tracking-[4px] uppercase text-orange-500 mb-3">
+            PORTFOLIO
           </p>
 
-          <h2 className="text-4xl md:text-5xl font-bold">
+          <h2 className="text-5xl font-bold text-slate-900">
             Featured Projects
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+        {/* Portfolio Grid */}
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {projects.map((project) => (
+
             <div
-              key={index}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300"
+              key={project.id}
+              className="group bg-white rounded-3xl overflow-hidden border border-gray-200 hover:border-orange-500 hover:-translate-y-2 transition-all duration-300 shadow-sm hover:shadow-xl"
             >
-              <div className="relative h-60">
+
+              {/* Image */}
+
+              <div className="relative h-64 overflow-hidden">
+
                 <Image
-                  src={project.image}
-                  alt={project.title}
+                  src={
+                    project._embedded?.["wp:featuredmedia"]?.[0]
+                      ?.source_url || "/images/placeholder.jpg"
+                  }
+                  alt={project.title.rendered}
                   fill
-                  className="object-cover"
+                  unoptimized
+                  className="object-cover transition duration-500 group-hover:scale-105"
                 />
+
               </div>
 
-              <div className="p-6">
-                <span className="text-orange-500 text-sm font-medium">
-                  {project.category}
-                </span>
+              {/* Content */}
 
-                <h3 className="text-xl font-semibold mt-2 mb-3">
-                  {project.title}
-                </h3>
+              <div className="p-7">
 
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {project.description}
+                <p className="text-orange-500 text-sm font-semibold uppercase tracking-widest mb-3">
+                  PORTFOLIO
                 </p>
 
-                <button className="mt-5 text-orange-500 font-medium hover:underline">
-                  View Project →
-                </button>
+                <h3
+                  className="text-3xl font-bold text-slate-900 leading-tight mb-4"
+                  dangerouslySetInnerHTML={{
+                    __html: project.title.rendered,
+                  }}
+                />
+
+                <p className="text-gray-600 leading-8 mb-6">
+                  {project.acf?.short_description}
+                </p>
+<a
+  href={project.acf.project_url}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all duration-300"
+>
+  View Project →
+</a>
               </div>
+
             </div>
+
           ))}
+
         </div>
 
       </div>

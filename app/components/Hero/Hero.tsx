@@ -1,6 +1,20 @@
 import Image from "next/image";
 
-export default function Hero() {
+interface HeroProps {
+  data: {
+    hero_title: string;
+    hero_subtitle: string;
+    hero_description: string;
+    hero_image: string;
+  };
+}
+
+export default function Hero({ data }: HeroProps) {
+  // Split title and make last word orange
+  const words = data.hero_title?.split(" ") || [];
+  const lastWord = words.pop();
+  const firstPart = words.join(" ");
+
   return (
     <section
       id="hero"
@@ -13,71 +27,96 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          
+
           {/* Left Content */}
+
           <div>
+
             <p className="text-sm font-medium text-orange-500 tracking-widest uppercase mb-4">
               Available for work
             </p>
 
-            <h1 className="font-bold text-5xl md:text-6xl lg:text-7xl leading-tight mb-6">
-              Hi, I'm <span className="text-orange-500">Deepak</span>
+            <h1 className="font-bold text-5xl md:text-5xl lg:text-5xl leading-tight mb-6">
+              {firstPart}{" "}
+              <span className="text-orange-500">
+                {lastWord}
+              </span>
             </h1>
 
             <p className="text-lg md:text-xl text-gray-600 max-w-md mb-10">
-              Full <strong>Stack Developer</strong>.
-              I design and build digital products that people love to use.
+              <strong>{data.hero_subtitle}</strong>
+              <br />
+              {data.hero_description}
             </p>
 
             <div className="flex flex-wrap gap-4">
+
               <a
                 href="#work"
-                className="bg-black text-white px-7 py-3 rounded-full"
+                className="bg-black text-white px-7 py-3 rounded-full transition hover:bg-orange-500"
               >
                 View My Work
               </a>
 
               <a
                 href="#contact"
-                className="border border-gray-300 px-7 py-3 rounded-full"
+                className="border border-gray-300 px-7 py-3 rounded-full transition hover:border-orange-500 hover:text-orange-500"
               >
                 Get In Touch
               </a>
+
             </div>
 
             {/* Stats */}
+
             <div className="flex gap-8 mt-14 pt-8 border-t">
+
               <div>
                 <p className="font-bold text-3xl">54+</p>
-                <p className="text-xs text-gray-500">Projects Done</p>
+                <p className="text-xs text-gray-500">
+                  Projects Done
+                </p>
               </div>
 
               <div>
                 <p className="font-bold text-3xl">42+</p>
-                <p className="text-xs text-gray-500">Happy Clients</p>
+                <p className="text-xs text-gray-500">
+                  Happy Clients
+                </p>
               </div>
 
               <div>
                 <p className="font-bold text-3xl">9y</p>
-                <p className="text-xs text-gray-500">Experience</p>
+                <p className="text-xs text-gray-500">
+                  Experience
+                </p>
               </div>
+
             </div>
+
           </div>
 
           {/* Right Image */}
+
           <div className="flex justify-center md:justify-end">
+
             <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+
               <Image
-                src="/images/deepak.jpeg"
-                alt="Hero"
+                src={data.hero_image || "/images/deepak.jpeg"}
+                alt={data.hero_title}
                 fill
+                priority
+                unoptimized
                 className="object-cover rounded-3xl"
               />
 
-              <div className="absolute -bottom-4 -left-4 bg-orange-500 text-white px-4 py-2 rounded-xl font-semibold">
+              <div className="absolute -bottom-4 -left-4 bg-orange-500 text-white px-4 py-2 rounded-xl font-semibold shadow-lg">
                 Open to projects
               </div>
+
             </div>
+
           </div>
 
         </div>

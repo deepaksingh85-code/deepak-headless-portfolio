@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "http",
+        hostname: "headlesscmsnew.local",
+      },
+      {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
