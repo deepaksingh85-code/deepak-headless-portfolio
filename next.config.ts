@@ -4,8 +4,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "headlesscmsnew.local",
+        protocol: "https",
+        hostname: "orangered-newt-225853.hostingersite.com",
       },
       {
         protocol: "https",

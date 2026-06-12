@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { fetchAPI } from "@/lib/wordpress";
 
 interface Service {
@@ -37,7 +40,9 @@ console.log(services);
             Services
           </h2>
         </div>
-
+<p className="text-red-500 text-3xl font-bold">
+  {new Date().toISOString()}
+</p>
         {/* Service Cards */}
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
