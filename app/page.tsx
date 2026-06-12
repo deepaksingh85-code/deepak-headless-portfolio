@@ -5,7 +5,6 @@ import About from "./components/About/About";
 import Portfolio from "./components/Portfolio/Portfolio";
 import Testimonials from "./components/Testimonials/Testimonials";
 import Contact from "./components/Contact/Contact";
-import Blog from "./components/Blog/Blog";
 import Footer from "./components/Footer/Footer";
 
 import { fetchAPI } from "@/lib/wordpress";
@@ -19,13 +18,12 @@ export default async function Home() {
     services,
     portfolio,
     timeline,
-    blogs,
+    
   ] = await Promise.all([
     fetchAPI("/pages?slug=home"),
     fetchAPI("/service?_embed&orderby=date&order=asc"),
     fetchAPI("/portfolio?_embed"),
     fetchAPI("/timeline"),
-    fetchAPI("/posts?_embed&per_page=3"),
   ]);
 
   const acf = home[0]?.acf;
@@ -60,8 +58,7 @@ export default async function Home() {
 
       <Testimonials data={timeline} />
 
-      <Blog data={blogs} />
-
+    
       <Contact />
 
       <Footer />
